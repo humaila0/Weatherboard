@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+coverage
+.env
+.env.local
+.env.*.local
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
+.vercel
+.netlify

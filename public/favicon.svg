@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="WeatherBoard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#152a45"/>
+      <stop offset="1" stop-color="#08111e"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e2edfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="114" fill="url(#bg)"/>
+  <circle cx="338" cy="174" r="68" fill="#ffc46b"/>
+  <g>
+    <rect x="118" y="280" width="292" height="118" rx="59" fill="#07101b" opacity="0.42"/>
+    <ellipse cx="222" cy="288" rx="84" ry="82" fill="#07101b" opacity="0.42"/>
+    <rect x="112" y="262" width="292" height="118" rx="59" fill="url(#cloud)"/>
+    <ellipse cx="222" cy="270" rx="84" ry="80" fill="url(#cloud)"/>
+    <ellipse cx="222" cy="292" rx="58" ry="52" fill="#e6eff9"/>
+  </g>
+  <rect x="176" y="420" width="18" height="40" rx="9" fill="#7ab8ff" opacity="0.9"/>
+  <rect x="234" y="420" width="18" height="40" rx="9" fill="#7ab8ff" opacity="0.7"/>
+</svg>
