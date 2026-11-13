@@ -7,8 +7,7 @@ verbatim log of the two user messages sent in the project session, in chronologi
 prompt history has been invented or reworded.
 
 The first message carried the full project brief (including the pasted Edspire challenge text).
-The second message supplied the extracted text of the challenge PDF so it could be checked against
-the implementation, followed by the reminder that the attached Dribbble image was inspiration only.
+
 
 ---
 
