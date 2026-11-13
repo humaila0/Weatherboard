@@ -4,11 +4,7 @@ A calm, installable personal weather dashboard built with React, Vite, and real 
 Search for any city, read current conditions and a five-day forecast, save up to five favourite
 cities, install it as a PWA, and keep the last viewed city available offline.
 
-> **Live app:** _Add your deployment URL here (for example `https://weatherboard.vercel.app`)._
->
-> **Public repository:** _Add your GitHub repository URL here._
-
-![WeatherBoard social preview](public/og-image.png)
+> **Live app:** https://weatherboard1-six.vercel.app/
 
 ---
 
