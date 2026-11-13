@@ -986,8 +986,30 @@ p {
 }
 
 .weather-icon {
+  position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
   color: var(--accent);
+}
+
+.weather-icon-svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* Decorative particle layers sit behind the SVG. They are sized in
+   percentages of the icon box, so they scale from 26px to 52px without
+   extra media queries. Only transform/opacity animate. */
+.weather-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 999px;
 }
 
 .weather-icon--warm {
@@ -1012,6 +1034,131 @@ p {
 
 .weather-icon--storm {
   color: #c9a7ff;
+}
+
+/* Ambient per-condition motion. Each icon keeps its own personality while
+   staying subtle enough to read at small sizes. */
+.weather-icon--cond-clear.weather-icon--day .weather-icon-svg {
+  animation: wx-sun-spin 60s linear infinite;
+}
+
+.weather-icon--cond-clear.weather-icon--night .weather-icon-svg,
+.weather-icon--cond-partly-cloudy .weather-icon-svg,
+.weather-icon--cond-cloudy .weather-icon-svg,
+.weather-icon--cond-snow .weather-icon-svg {
+  animation: wx-sway 9s ease-in-out infinite;
+}
+
+.weather-icon--cond-fog .weather-icon-svg {
+  animation: wx-fog-breathe 8s ease-in-out infinite;
+}
+
+.weather-icon--cond-drizzle .weather-icon-svg,
+.weather-icon--cond-rain .weather-icon-svg,
+.weather-icon--cond-heavy-rain .weather-icon-svg {
+  animation: wx-bob 6s ease-in-out infinite;
+}
+
+.weather-icon--cond-thunder .weather-icon-svg {
+  animation: wx-strike 7s ease-in-out infinite;
+}
+
+/* Rain and drizzle drops */
+.weather-fx--drizzle span,
+.weather-fx--rain span,
+.weather-fx--rain-heavy span {
+  position: absolute;
+  top: 45%;
+  width: max(1.5px, 5%);
+  height: 15%;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0;
+  animation: wx-rain 1.6s linear infinite;
+}
+
+.weather-fx--drizzle span:nth-child(1) {
+  left: 34%;
+  animation-delay: 0ms;
+}
+
+.weather-fx--drizzle span:nth-child(2) {
+  left: 58%;
+  animation-delay: 800ms;
+}
+
+.weather-fx--rain span:nth-child(1) {
+  left: 27%;
+  animation-delay: 0ms;
+}
+
+.weather-fx--rain span:nth-child(2) {
+  left: 47%;
+  animation-delay: 520ms;
+}
+
+.weather-fx--rain span:nth-child(3) {
+  left: 67%;
+  animation-delay: 1040ms;
+}
+
+.weather-fx--rain-heavy span {
+  animation-duration: 1s;
+}
+
+.weather-fx--rain-heavy span:nth-child(1) {
+  left: 23%;
+  animation-delay: 0ms;
+}
+
+.weather-fx--rain-heavy span:nth-child(2) {
+  left: 41%;
+  animation-delay: 260ms;
+}
+
+.weather-fx--rain-heavy span:nth-child(3) {
+  left: 59%;
+  animation-delay: 520ms;
+}
+
+.weather-fx--rain-heavy span:nth-child(4) {
+  left: 77%;
+  animation-delay: 780ms;
+}
+
+/* Snowflakes */
+.weather-fx--snow span {
+  position: absolute;
+  top: 42%;
+  width: max(2px, 7%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  animation: wx-snow 4s linear infinite;
+}
+
+.weather-fx--snow span:nth-child(1) {
+  left: 28%;
+  animation-delay: 0ms;
+}
+
+.weather-fx--snow span:nth-child(2) {
+  left: 47%;
+  animation-delay: 1300ms;
+}
+
+.weather-fx--snow span:nth-child(3) {
+  left: 66%;
+  animation-delay: 2600ms;
+}
+
+/* A soft pulse behind thunder icons instead of a harsh full-screen flash. */
+.weather-fx--storm {
+  background: radial-gradient(circle at 50% 45%, currentColor 0%, transparent 62%);
+  opacity: 0;
+  animation: wx-flash 7s ease-in-out infinite;
+  mix-blend-mode: screen;
 }
 
 .weather-icon--hero {
@@ -2149,6 +2296,118 @@ p {
   }
 }
 
+@keyframes wx-sun-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wx-sway {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2.5%, -3%, 0) rotate(-1.5deg);
+  }
+}
+
+@keyframes wx-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -4%, 0);
+  }
+}
+
+@keyframes wx-fog-breathe {
+  0%,
+  100% {
+    transform: translate3d(-2%, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(2%, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes wx-strike {
+  0%,
+  84%,
+  100% {
+    opacity: 1;
+  }
+  87% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.7;
+  }
+  95% {
+    opacity: 1;
+  }
+}
+
+@keyframes wx-rain {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -35%, 0);
+  }
+  18% {
+    opacity: 0.85;
+  }
+  78% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 190%, 0);
+  }
+}
+
+@keyframes wx-snow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -30%, 0);
+  }
+  18% {
+    opacity: 0.9;
+  }
+  78% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(28%, 200%, 0);
+  }
+}
+
+@keyframes wx-flash {
+  0%,
+  86%,
+  100% {
+    opacity: 0;
+  }
+  88% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.08;
+  }
+  92% {
+    opacity: 0.4;
+  }
+  95% {
+    opacity: 0;
+  }
+}
+
 @keyframes pop-in {
   from {
     opacity: 0;
@@ -2541,5 +2800,14 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Particle layers only make sense while moving, so remove them entirely. */
+  .weather-fx {
+    display: none;
+  }
+
+  .weather-icon-svg {
+    animation: none !important;
   }
 }

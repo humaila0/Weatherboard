@@ -87,7 +87,10 @@ Provider names are shown in the UI. Mock weather is never presented as live data
 
 - Dark/light theme with system-preference default, pre-paint theme restoration, and persistence.
 - Celsius/Fahrenheit toggle with persisted preference.
-- Subtle floating weather icon animation and card hover transitions.
+- Per-condition CSS-animated weather icons: slow sun rotation, drifting clouds, falling
+  rain/snow particles, and a soft lightning pulse. No Lottie or extra dependency; motion scales
+  with the icon and is disabled under `prefers-reduced-motion`.
+- Card hover transitions and entrance motion.
 - Self-hosted Inter variable font so typography also works offline.
 - Install button appears only when the browser fires `beforeinstallprompt`.
 
@@ -489,12 +492,14 @@ available from the browser menu. No horizontal overflow was measured at 375, 768
 npm test
 ```
 
-Result at hand-off: **31 tests passed across 5 files**.
+Result at hand-off: **36 tests passed across 6 files**.
 
 Coverage includes:
 
 - PWA manifest completeness, on-disk icon dimensions, `index.html` manifest/theme links, and
   service-worker lifecycle/precache hooks.
+- Weather-icon markup: condition classes, particle counts for rain/heavy rain/snow, night variants,
+  and accessible labelling.
 - Open-Meteo geocoding normalisation, population ordering, empty responses, and invalid payloads.
 - WMO and OpenWeatherMap condition mapping, including day/night icons.
 - OpenWeatherMap three-hourly forecast aggregation: grouping, min/max, nearest-noon condition,
@@ -538,7 +543,7 @@ Coverage includes:
 
 ```text
 npm run lint   # passes
-npm run build  # passes; ~312 kB JS / ~36.5 kB CSS before gzip
+npm run build  # passes; ~313 kB JS / ~39.9 kB CSS before gzip
 ```
 
 The build output is a static `dist/` folder. No server runtime is required.

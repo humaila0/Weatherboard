@@ -937,6 +937,10 @@ decisions and corrections are auditable; they are not presented as additional us
 - Added 300 ms debounced search, in-memory result caching, duplicate-request prevention, and
   `AbortController` race protection. Verified rapid typing produces a single geocoding request.
 - Added population ordering for Open-Meteo geocoding so larger, more likely matches rank first.
+- Added per-condition CSS weather animation: slow sun rotation, drifting clouds, falling rain and
+  snow particles, fog motion, and a soft lightning pulse. Sizing is percentage-based so the same
+  markup scales from forecast icons to the hero icon; only transform/opacity animate, and
+  `prefers-reduced-motion` removes both particle layers and icon motion.
 
 ### Functional and accessibility reviews
 
@@ -958,11 +962,13 @@ decisions and corrections are auditable; they are not presented as additional us
 
 ### Tests and documentation
 
-- Wrote 31 unit tests covering weather-code mapping, OpenWeatherMap forecast aggregation, Open-Meteo
+- Wrote 36 unit tests covering weather-code mapping, OpenWeatherMap forecast aggregation, Open-Meteo
   normalisation, unit conversion, reminder scheduling, city validation and sanitisation, favourite
   sanitisation, and error-copy mapping.
 - Added service and PWA asset tests: Open-Meteo geocoding ordering/empty/invalid payloads, plus
   manifest completeness, icon dimensions, and service-worker capability checks.
+- Added weather-icon rendering tests for condition classes, particle counts, night variants, and
+  accessible labelling.
 - Fixed two failing forecast-aggregation expectations caused by a test fixture reference epoch that
   was not aligned to midnight UTC; the production aggregation code was correct.
 - Documented the client-only notification limitation honestly rather than claiming guaranteed
