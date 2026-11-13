@@ -7,7 +7,6 @@ last viewed city available offline. Real data only — mock weather is never sho
 **Live app:** <https://weatherboard1-six.vercel.app/>
 **Repository:** <https://github.com/humaila0/Weatherboard>
 
-![WeatherBoard social preview](public/og-image.png)
 
 ## Contents
 
