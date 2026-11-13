@@ -104,7 +104,7 @@ export function ReminderPanel({
               </p>
             ) : (
               <p className="field-hint">
-                Current time: {formatTimeLabel(settings.time)}. Used as your local time.
+                Notifications arrive at {formatTimeLabel(settings.time)} in your device’s time zone.
               </p>
             )}
           </div>
