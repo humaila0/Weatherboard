@@ -104,8 +104,6 @@ cp .env.example .env
 Without keys the app uses live Open-Meteo weather and geocoding. With keys, the primary providers
 are tried first and the active provider is labelled in the UI.
 
-`.env` and `.env.*.local` are git-ignored; `.env.example` is committed.
-
 ## API integration
 
 ### OpenWeatherMap (optional)
@@ -279,4 +277,3 @@ Weather data from [OpenWeatherMap](https://openweathermap.org/) and
 [Open-Meteo Geocoding](https://open-meteo.com/en/docs/geocoding-api); icons from
 [Lucide](https://lucide.dev/); typography is [Inter](https://rsms.me/inter/) via Fontsource.
 
-Built for the Edspire Frontend (React) Developer Technical Challenge, November 2026.
